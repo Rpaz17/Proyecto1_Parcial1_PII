@@ -47,14 +47,13 @@ public class GhostGame extends javax.swing.JFrame {
         initBotones();
         initFantasmas();
         setFantasmasRandom();
-
     }
 
-    public GhostGame(Menu_PrincipalSwing menu) {
+    public GhostGame(Menu_InicioSwing menu2) {
         initComponents();
-        this.menu = menu;
-        menu2 = new Menu_InicioSwing(menu);
-        config = new ConfiguracionSwing(menu);
+        this.menu2 = menu2;
+        menu2 = new Menu_InicioSwing(this.menu);
+        config = new ConfiguracionSwing(menu2);
         cantBuenos = config.cantidadG;
         cantMalos = config.cantidadG;
         contadorbJ1 = cantBuenos;
@@ -407,39 +406,39 @@ public class GhostGame extends javax.swing.JFrame {
         TABLERO.setLayout(TABLEROLayout);
         TABLEROLayout.setHorizontalGroup(
             TABLEROLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1120, Short.MAX_VALUE)
+            .addGap(0, 1090, Short.MAX_VALUE)
         );
         TABLEROLayout.setVerticalGroup(
             TABLEROLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 740, Short.MAX_VALUE)
+            .addGap(0, 690, Short.MAX_VALUE)
         );
 
-        fondo.add(TABLERO, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1120, 740));
+        fondo.add(TABLERO, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 1090, 690));
 
         NOMBRE.setFont(new java.awt.Font("Viner Hand ITC", 1, 36)); // NOI18N
         NOMBRE.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(NOMBRE, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 80, 130, 40));
+        fondo.add(NOMBRE, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 130, 40));
 
         jLabel8.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TURNO DE");
-        fondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 80, 150, -1));
+        fondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 80, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("FANTASMAS JUGADOR 1");
-        fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 180, 314, 36));
+        fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 180, 314, 36));
 
         jLabel3.setBackground(new java.awt.Color(102, 0, 0));
         jLabel3.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("FANTASMAS BUENOS");
-        fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 220, 270, 36));
+        fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 220, 270, 36));
 
         jLabel4.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("FANTASMAS MALOS");
-        fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 270, 260, 36));
+        fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 270, 260, 36));
 
         jLabel5.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -450,12 +449,12 @@ public class GhostGame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("FANTASMAS BUENOS");
-        fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 400, 270, 36));
+        fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 400, 270, 36));
 
         jLabel7.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("FANTASMAS MALOS");
-        fondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 450, 260, 36));
+        fondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 450, 260, 36));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 0));
         jButton1.setFont(new java.awt.Font("Chiller", 0, 36)); // NOI18N
@@ -481,7 +480,7 @@ public class GhostGame extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        fondo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, 190, 40));
+        fondo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, 190, 40));
 
         jLabel10.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -498,7 +497,7 @@ public class GhostGame extends javax.swing.JFrame {
 
         FMJ2.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FMJ2.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(FMJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 450, 40, 40));
+        fondo.add(FMJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 440, 40, 40));
 
         FBJ1.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FBJ1.setForeground(new java.awt.Color(255, 255, 255));
@@ -506,7 +505,7 @@ public class GhostGame extends javax.swing.JFrame {
 
         FMJ1.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FMJ1.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(FMJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1410, 270, 40, 40));
+        fondo.add(FMJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 260, 40, 40));
 
         FBJ2.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FBJ2.setForeground(new java.awt.Color(255, 255, 255));

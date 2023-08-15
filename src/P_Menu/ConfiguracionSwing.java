@@ -9,13 +9,13 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
     Configuracion config;
     Menu_PrincipalSwing menu;
     Menu_InicioSwing menu2;
-    public int cantidadG=4;
+    public int cantidadG;
     public int fanTrampa;
     public String modo = "ALEATORIO";
 
-    public ConfiguracionSwing(Menu_PrincipalSwing menu) {
+    public ConfiguracionSwing(Menu_InicioSwing menu) {
         initComponents();
-        this.menu = menu;
+        this.menu2 = menu;
 
     }
 
@@ -37,11 +37,11 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        DNormal = new javax.swing.JRadioButton();
+        DExpert = new javax.swing.JRadioButton();
+        DGenius = new javax.swing.JRadioButton();
+        MAleatorio = new javax.swing.JRadioButton();
+        MManual = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,53 +75,53 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
         jButton3.setText("MODO DE JUEGO");
         jButton3.setContentAreaFilled(false);
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setText("NORMAL");
-        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        DNormal.setBackground(new java.awt.Color(0, 0, 0));
+        DNormal.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
+        DNormal.setForeground(new java.awt.Color(255, 255, 255));
+        DNormal.setText("NORMAL");
+        DNormal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton1MouseClicked(evt);
+                DNormalMouseClicked(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setText("EXPERT");
-        jRadioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        DExpert.setBackground(new java.awt.Color(0, 0, 0));
+        DExpert.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
+        DExpert.setForeground(new java.awt.Color(255, 255, 255));
+        DExpert.setText("EXPERT");
+        DExpert.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton2MouseClicked(evt);
+                DExpertMouseClicked(evt);
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(0, 0, 0));
-        jRadioButton3.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setText("GENIUS");
-        jRadioButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        DGenius.setBackground(new java.awt.Color(0, 0, 0));
+        DGenius.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
+        DGenius.setForeground(new java.awt.Color(255, 255, 255));
+        DGenius.setText("GENIUS");
+        DGenius.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton3MouseClicked(evt);
+                DGeniusMouseClicked(evt);
             }
         });
 
-        jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jRadioButton4.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton4.setText("ALEATORIO");
-        jRadioButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        MAleatorio.setBackground(new java.awt.Color(0, 0, 0));
+        MAleatorio.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
+        MAleatorio.setForeground(new java.awt.Color(255, 255, 255));
+        MAleatorio.setText("ALEATORIO");
+        MAleatorio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton4MouseClicked(evt);
+                MAleatorioMouseClicked(evt);
             }
         });
 
-        jRadioButton5.setBackground(new java.awt.Color(0, 0, 0));
-        jRadioButton5.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
-        jRadioButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jRadioButton5.setText("MANUAL");
-        jRadioButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        MManual.setBackground(new java.awt.Color(0, 0, 0));
+        MManual.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
+        MManual.setForeground(new java.awt.Color(255, 255, 255));
+        MManual.setText("MANUAL");
+        MManual.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jRadioButton5MouseClicked(evt);
+                MManualMouseClicked(evt);
             }
         });
 
@@ -146,14 +146,14 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(DExpert, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DGenius, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(84, 84, 84)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(MManual, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(MAleatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,17 +178,17 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DExpert, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DGenius, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MAleatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MManual, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16))
@@ -218,42 +218,42 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+    private void DNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DNormalMouseClicked
         cantidadG=4;
-    }//GEN-LAST:event_jRadioButton1MouseClicked
+    }//GEN-LAST:event_DNormalMouseClicked
 
-    private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
+    private void DExpertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DExpertMouseClicked
         cantidadG=2;
-    }//GEN-LAST:event_jRadioButton2MouseClicked
+    }//GEN-LAST:event_DExpertMouseClicked
 
-    private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
+    private void DGeniusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DGeniusMouseClicked
        cantidadG=1;
        fanTrampa=4;
-    }//GEN-LAST:event_jRadioButton3MouseClicked
+    }//GEN-LAST:event_DGeniusMouseClicked
 
-    private void jRadioButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton4MouseClicked
+    private void MAleatorioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MAleatorioMouseClicked
         modo="ALEATORIO";
-    }//GEN-LAST:event_jRadioButton4MouseClicked
+    }//GEN-LAST:event_MAleatorioMouseClicked
 
-    private void jRadioButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton5MouseClicked
+    private void MManualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MManualMouseClicked
         modo="MANUAL";
-    }//GEN-LAST:event_jRadioButton5MouseClicked
+    }//GEN-LAST:event_MManualMouseClicked
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton DExpert;
+    private javax.swing.JRadioButton DGenius;
+    private javax.swing.JRadioButton DNormal;
+    private javax.swing.JRadioButton MAleatorio;
+    private javax.swing.JRadioButton MManual;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     // End of variables declaration//GEN-END:variables
 }
