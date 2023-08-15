@@ -12,12 +12,10 @@ public class Menu_InicioSwing extends javax.swing.JFrame {
     ConfiguracionSwing config;
     ReportesSwing reportes;
     MiPerfilSwing perfil;
-    GhostGame tablero;
 
     public Menu_InicioSwing(Menu_PrincipalSwing menu) {
         initComponents();
         this.menu = menu;
-        config = new ConfiguracionSwing(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -146,17 +144,7 @@ public class Menu_InicioSwing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_jugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_jugarMouseClicked
-        GhostGame tablero = new GhostGame(this);
-        if(config.cantidadG==4){
-            tablero.cantBuenos=config.cantidadG;
-            tablero.cantMalos=config.cantidadG;
-        }else if (config.cantidadG==2){
-            tablero.cantBuenos=config.cantidadG;
-            tablero.cantMalos=config.cantidadG;
-        }else if(config.cantidadG==2){
-            tablero.cantBuenos=config.cantidadG;
-            tablero.cantMalos=config.cantidadG;
-        }
+        GhostGame tablero = new GhostGame(this.menu);
         if (menu.jugador2 == null) {
             tablero.setVisible(false);
             this.setVisible(true);
@@ -173,7 +161,7 @@ public class Menu_InicioSwing extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cerrarsesionMouseClicked
 
     private void btn_configuracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_configuracionMouseClicked
-        config = new ConfiguracionSwing(this);
+        config = new ConfiguracionSwing(menu, this);
         config.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_configuracionMouseClicked

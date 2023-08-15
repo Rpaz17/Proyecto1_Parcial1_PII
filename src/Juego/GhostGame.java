@@ -29,12 +29,12 @@ public class GhostGame extends javax.swing.JFrame {
     private String turno;
     ConfiguracionSwing config;
     boolean ganador;
-    public int cantBuenos;
-    public int cantMalos;
-    public int contadorbJ1;
-    public int contadormJ1;
-    public int contadorbJ2;
-    public int contadormJ2;
+    int cantBuenos;
+    int cantMalos;
+    int contadorbJ1;
+    int contadormJ1;
+    int contadorbJ2;
+    int contadormJ2;
     public String perdiste;
     Ghosts fan;
     Menu_PrincipalSwing menu;
@@ -47,11 +47,13 @@ public class GhostGame extends javax.swing.JFrame {
         initBotones();
         initFantasmas();
         setFantasmasRandom();
+
     }
 
-    public GhostGame(Menu_InicioSwing menu2) {
+    public GhostGame(Menu_PrincipalSwing menu) {
         initComponents();
-        this.menu2 = menu2;
+        this.menu = menu;
+        menu2 = new Menu_InicioSwing(menu);
         cantBuenos = config.cantidadG;
         cantMalos = config.cantidadG;
         contadorbJ1 = cantBuenos;

@@ -53,4 +53,13 @@ public class Login {
         }
     }
 
+    public boolean eliminarCuenta(String jugador) {
+        Jugador eliminar = buscarJugador(jugador);
+        if (eliminar != null) {
+            jugadorArreglo.remove( buscarJugador(jugador));
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

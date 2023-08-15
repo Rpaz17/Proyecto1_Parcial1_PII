@@ -1,13 +1,14 @@
 package P_Menu;
 
 import Login_Registro.*;
-import MiPerfil.EliminarCuenta;
+import MiPerfil.CambiarContraseña;
 import Swings_Menus.*;
+import javax.swing.JOptionPane;
 
 public class MiPerfilSwing extends javax.swing.JFrame {
 
     Menu_InicioSwing menu2;
-    EliminarCuenta eliminar;
+    CambiarContraseña cambiarcontra;
     Menu_PrincipalSwing menu;
     Jugador jugador;
     LoginSwing log;
@@ -74,6 +75,11 @@ public class MiPerfilSwing extends javax.swing.JFrame {
         cambiar.setForeground(new java.awt.Color(255, 255, 255));
         cambiar.setText("CAMBIAR PASSWORD");
         cambiar.setBorderPainted(false);
+        cambiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cambiarMouseClicked(evt);
+            }
+        });
 
         EliminarCuenta.setBackground(new java.awt.Color(31, 44, 56));
         EliminarCuenta.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
@@ -151,10 +157,17 @@ public class MiPerfilSwing extends javax.swing.JFrame {
     }//GEN-LAST:event_datosMouseClicked
 
     private void EliminarCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarCuentaMouseClicked
-        eliminar = new EliminarCuenta(menu);
-        eliminar.setVisible(true);
-        this.setVisible(false);
+        JOptionPane.showMessageDialog(this, "Tu cuenta fue eliminada exitosamente", "ELIMINASTE TU CUENTA", JOptionPane.INFORMATION_MESSAGE);
+        menu.LogUsers.eliminarCuenta(menu.jugador1.playersName);
+        this.dispose();
+        menu.setVisible(true);
     }//GEN-LAST:event_EliminarCuentaMouseClicked
+
+    private void cambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarMouseClicked
+        cambiarcontra = new CambiarContraseña(menu);
+        cambiarcontra.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cambiarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
