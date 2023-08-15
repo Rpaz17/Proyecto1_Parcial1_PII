@@ -16,7 +16,7 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
     public ConfiguracionSwing(Menu_InicioSwing menu) {
         initComponents();
         this.menu2 = menu;
-
+        cantidadG=4;
     }
 
     public Configuracion getConfiguracion() {
