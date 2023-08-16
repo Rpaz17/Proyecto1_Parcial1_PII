@@ -1,5 +1,6 @@
 package Juego;
 
+import Login_Registro.Configuracion;
 import Login_Registro.Jugador;
 import Login_Registro.Login;
 import P_Menu.ConfiguracionSwing;
@@ -31,6 +32,7 @@ public class GhostGame extends javax.swing.JFrame {
     boolean ganador;
     int cantBuenos;
     int cantMalos;
+    int fantTrampa;
     int contadorbJ1;
     int contadormJ1;
     int contadorbJ2;
@@ -50,12 +52,13 @@ public class GhostGame extends javax.swing.JFrame {
 
     }
 
-    public GhostGame(Menu_PrincipalSwing menu) {
+    public GhostGame(Menu_PrincipalSwing menu, Configuracion config) {
         initComponents();
         this.menu = menu;
         menu2 = new Menu_InicioSwing(menu);
         cantBuenos = config.cantidadG;
         cantMalos = config.cantidadG;
+        fantTrampa = config.fanTrampa;
         contadorbJ1 = cantBuenos;
         contadormJ1 = cantMalos;
         contadorbJ2 = cantBuenos;

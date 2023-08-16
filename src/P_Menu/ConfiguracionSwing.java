@@ -8,14 +8,13 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
     Configuracion config;
     Menu_PrincipalSwing menu;
     Menu_InicioSwing menu2;
-    public int cantidadG;
-    public int fanTrampa;
-    public String modo = "ALEATORIO";
 
     public ConfiguracionSwing(Menu_PrincipalSwing menu, Menu_InicioSwing menu2) {
         initComponents();
         this.menu = menu;
         this.menu2 = menu2;
+        SetConfigValues();
+
     }
 
     public Configuracion getConfiguracion() {
@@ -212,32 +211,63 @@ public class ConfiguracionSwing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        menu2 = new Menu_InicioSwing(menu);
         menu2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
-        cantidadG = 4;
+        menu.configuracion.cantidadG = 4;
     }//GEN-LAST:event_jRadioButton1MouseClicked
 
     private void jRadioButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton2MouseClicked
-        cantidadG = 2;
+        menu.configuracion.cantidadG = 2;
     }//GEN-LAST:event_jRadioButton2MouseClicked
 
     private void jRadioButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton3MouseClicked
-        cantidadG = 1;
-        fanTrampa = 4;
+        menu.configuracion.cantidadG = 1;
+        menu.configuracion.fanTrampa = 4;
     }//GEN-LAST:event_jRadioButton3MouseClicked
 
     private void jRadioButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton4MouseClicked
-        modo = "ALEATORIO";
+        menu.configuracion.modo = "ALEATORIO";
     }//GEN-LAST:event_jRadioButton4MouseClicked
 
     private void jRadioButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton5MouseClicked
-        modo = "MANUAL";
+        menu.configuracion.modo = "MANUAL";
     }//GEN-LAST:event_jRadioButton5MouseClicked
 
+    private void SetConfigValues() {
+        if (menu.configuracion.cantidadG == 4) {
+            this.jRadioButton1.setSelected(true);
+        } else {
+            this.jRadioButton1.setSelected(false);
+        }
+
+        if (menu.configuracion.cantidadG == 2) {
+            this.jRadioButton2.setSelected(true);
+        } else {
+            this.jRadioButton2.setSelected(false);
+        }
+
+        if (menu.configuracion.cantidadG == 1 && menu.configuracion.fanTrampa == 4) {
+            this.jRadioButton3.setSelected(true);
+        } else {
+            this.jRadioButton3.setSelected(false);
+        }
+
+        if (menu.configuracion.modo == "ALEATORIO") {
+            this.jRadioButton4.setSelected(true);
+        } else {
+            this.jRadioButton4.setSelected(false);
+        }
+
+        if (menu.configuracion.modo == "MANUAL") {
+            this.jRadioButton5.setSelected(true);
+        } else {
+            this.jRadioButton5.setSelected(false);
+        }
+
+    }
     /**
      * @param args the command line arguments
      */

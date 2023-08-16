@@ -16,8 +16,10 @@ public class Menu_InicioSwing extends javax.swing.JFrame {
     public Menu_InicioSwing(Menu_PrincipalSwing menu) {
         initComponents();
         this.menu = menu;
+        config = new ConfiguracionSwing(menu, this);
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,7 +146,7 @@ public class Menu_InicioSwing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_jugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_jugarMouseClicked
-        GhostGame tablero = new GhostGame(this.menu);
+        GhostGame tablero = new GhostGame(this.menu, menu.configuracion);
         if (menu.jugador2 == null) {
             tablero.setVisible(false);
             this.setVisible(true);
@@ -161,7 +163,6 @@ public class Menu_InicioSwing extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cerrarsesionMouseClicked
 
     private void btn_configuracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_configuracionMouseClicked
-        config = new ConfiguracionSwing(menu, this);
         config.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_configuracionMouseClicked

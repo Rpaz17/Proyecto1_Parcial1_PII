@@ -2,24 +2,12 @@ package Login_Registro;
 
 public class Configuracion {
     private int cuentaConfiguracion = 0;
-    private LoginSwing login;
-    private Configuracion config;
-    private Jugador jugador;
-    private int contador = 0;
+    public int cantidadG=4;
+    public int fanTrampa=4;
+    public String modo = "ALEATORIO";
     
-    public void setLoginSwing (LoginSwing log){
-        this.login=log;
+    public Configuracion() {
+        
     }
     
-    public void setJugador(Jugador jugador){
-        this.jugador=jugador;
-    }
-    
-    public void click(){
-        contador++;
-    }
-    
-    public int getContador(){
-        return contador;
-    }
 }

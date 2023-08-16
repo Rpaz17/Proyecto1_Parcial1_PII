@@ -12,6 +12,7 @@ public class CambiarContraseña extends javax.swing.JFrame {
     public CambiarContraseña(Menu_PrincipalSwing perfil) {
         initComponents();
         this.perfil = new MiPerfilSwing(null);
+
     }
 
 
@@ -142,7 +143,9 @@ public class CambiarContraseña extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void cambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarMouseClicked
-        if(contra_actual.getText() == menu.jugador1.password){
+        String contra = contra_actual.getText();
+        String contraActual = menu.jugador1.getPassword();
+        if(contra == contraActual){
             menu.LogUsers.cambiarContraseña(nueva_contra.getText(), menu.jugador1.getPlayersName());
             JOptionPane.showMessageDialog(this, "La contraseña se cambió exitosamente", "Cambio de contraseña", JOptionPane.INFORMATION_MESSAGE);
         }else{

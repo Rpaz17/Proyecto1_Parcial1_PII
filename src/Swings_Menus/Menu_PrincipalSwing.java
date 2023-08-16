@@ -7,12 +7,14 @@ public class Menu_PrincipalSwing extends javax.swing.JFrame {
     public Login LogUsers;
     LoginSwing login;
     Registro_Swing registro;
+    public Configuracion configuracion;
     public Jugador jugador1;
     public Jugador jugador2;
 
     public Menu_PrincipalSwing() {
         initComponents();
         LogUsers = new Login();
+        configuracion = new Configuracion();
         this.login = new LoginSwing(this);
         this.registro = new Registro_Swing(this);
     }

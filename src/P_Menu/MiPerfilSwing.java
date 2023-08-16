@@ -18,6 +18,7 @@ public class MiPerfilSwing extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.menu = menu;
+        menu2 = new Menu_InicioSwing(menu);
     }
 
     @SuppressWarnings("unchecked")
@@ -147,7 +148,6 @@ public class MiPerfilSwing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        menu2 = new Menu_InicioSwing(menu);
         menu2.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
@@ -160,6 +160,7 @@ public class MiPerfilSwing extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Tu cuenta fue eliminada exitosamente", "ELIMINASTE TU CUENTA", JOptionPane.INFORMATION_MESSAGE);
         menu.LogUsers.eliminarCuenta(menu.jugador1.playersName);
         this.dispose();
+        this.setVisible(false);
         menu.setVisible(true);
     }//GEN-LAST:event_EliminarCuentaMouseClicked
 
