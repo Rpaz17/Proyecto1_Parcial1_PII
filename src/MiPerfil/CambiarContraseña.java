@@ -1,20 +1,20 @@
-
 package MiPerfil;
 
 import P_Menu.MiPerfilSwing;
-import Swings_Menus.Menu_PrincipalSwing;
+import Swings_Menus.*;
 import javax.swing.JOptionPane;
 
 public class CambiarContraseña extends javax.swing.JFrame {
 
- MiPerfilSwing perfil;
- Menu_PrincipalSwing menu;
-    public CambiarContraseña(Menu_PrincipalSwing perfil) {
+    MiPerfilSwing perfil;
+    Menu_PrincipalSwing menu;
+    Menu_InicioSwing menu2;
+    public CambiarContraseña(Menu_PrincipalSwing menu, Menu_InicioSwing menu2, MiPerfilSwing miperfil) {
         initComponents();
-        this.perfil = new MiPerfilSwing(null);
-
+        this.menu = menu;
+        this.menu2 = menu2;
+        this.perfil = miperfil;
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -23,12 +23,12 @@ public class CambiarContraseña extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        contra_actual = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         cambiar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        nueva_contra = new javax.swing.JPasswordField();
+        contra_actual = new javax.swing.JTextField();
+        nueva_contra = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,10 +95,10 @@ public class CambiarContraseña extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nueva_contra)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(contra_actual)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(nueva_contra))
                                 .addGap(49, 49, 49)))
                         .addGap(20, 20, 20))))
         );
@@ -113,9 +113,9 @@ public class CambiarContraseña extends javax.swing.JFrame {
                 .addComponent(contra_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nueva_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(cambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,30 +139,33 @@ public class CambiarContraseña extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         perfil.setVisible(true);
-       this.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void cambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarMouseClicked
-        String contra = contra_actual.getText();
-        String contraActual = menu.jugador1.getPassword();
-        if(contra == contraActual){
-            menu.LogUsers.cambiarContraseña(nueva_contra.getText(), menu.jugador1.getPlayersName());
-            JOptionPane.showMessageDialog(this, "La contraseña se cambió exitosamente", "Cambio de contraseña", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(this,"La contraseña actual que ingresaste es incorrecta, vuelve a intentarlo", "CONTRASEÑA INCORRECTA", JOptionPane.ERROR_MESSAGE);
-        }
+        String Nueva;
+          if(!contra_actual.getText().equals(nueva_contra.getText()) && contra_actual!=null && nueva_contra!=null){
+            Nueva=contra_actual.getText();
+          menu.LogUsers.cambiarContraseña( Nueva, menu.jugador1.playersName);
+          JOptionPane.showMessageDialog(this,"Se ha cambiado la contraseña de manera exitosa.");
+          contra_actual.setText(null);
+          nueva_contra.setText(null);
+          
+       }else{
+             JOptionPane.showMessageDialog(this,"Porfavor llene todos los espacios de manera Correcta.");
+        } 
     }//GEN-LAST:event_cambiarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cambiar;
-    private javax.swing.JPasswordField contra_actual;
+    private javax.swing.JTextField contra_actual;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField nueva_contra;
+    private javax.swing.JTextField nueva_contra;
     // End of variables declaration//GEN-END:variables
 }

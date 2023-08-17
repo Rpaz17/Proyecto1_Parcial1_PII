@@ -2,25 +2,25 @@ package P_Menu;
 
 import Login_Registro.*;
 import MiPerfil.CambiarContraseña;
+import MiPerfil.MisDatos;
 import Swings_Menus.*;
 import javax.swing.JOptionPane;
 
 public class MiPerfilSwing extends javax.swing.JFrame {
-
+    
     Menu_InicioSwing menu2;
     CambiarContraseña cambiarcontra;
     Menu_PrincipalSwing menu;
-    Jugador jugador;
-    LoginSwing log;
-    Configuracion config;
-
-    public MiPerfilSwing(Menu_PrincipalSwing menu) {
+    MisDatos data;
+    
+    public MiPerfilSwing(Menu_PrincipalSwing menu, Menu_InicioSwing menu2) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.menu = menu;
-        menu2 = new Menu_InicioSwing(menu);
+        this.menu2 = menu2;
+        cambiarcontra = new CambiarContraseña(menu,menu2, this);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -153,7 +153,9 @@ public class MiPerfilSwing extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void datosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_datosMouseClicked
-
+        data = new MisDatos(menu2, menu);
+        data.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_datosMouseClicked
 
     private void EliminarCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarCuentaMouseClicked
@@ -165,7 +167,6 @@ public class MiPerfilSwing extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarCuentaMouseClicked
 
     private void cambiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarMouseClicked
-        cambiarcontra = new CambiarContraseña(menu);
         cambiarcontra.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cambiarMouseClicked

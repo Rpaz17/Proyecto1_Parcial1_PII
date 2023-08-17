@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -21,15 +22,16 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 public class GhostGame extends javax.swing.JFrame {
 
     private Botones[][] botons;
-    private Ghosts[] gBuenos = new Ghosts[4];
-    private Ghosts[] gMalos = new Ghosts[4];
+    private Ghosts[] gBuenosP1 = new Ghosts[4];
+    private Ghosts[] gMalosP1 = new Ghosts[4];
+    private Ghosts[] gBuenosP2 = new Ghosts[4];
+    private Ghosts[] gMalosP2 = new Ghosts[4];
     private Ghosts salida;
     private Botones botonInicio;
     private Botones botonFinal;
     private Botones character;
     private String turno;
     ConfiguracionSwing config;
-    boolean ganador;
     int cantBuenos;
     int cantMalos;
     int fantTrampa;
@@ -49,13 +51,12 @@ public class GhostGame extends javax.swing.JFrame {
         initBotones();
         initFantasmas();
         setFantasmasRandom();
-
     }
 
-    public GhostGame(Menu_PrincipalSwing menu, Configuracion config) {
+    public GhostGame(Menu_PrincipalSwing menu, Menu_InicioSwing menu2, Configuracion config) {
         initComponents();
         this.menu = menu;
-        menu2 = new Menu_InicioSwing(menu);
+        this.menu2 = menu2;
         cantBuenos = config.cantidadG;
         cantMalos = config.cantidadG;
         fantTrampa = config.fanTrampa;
@@ -74,6 +75,10 @@ public class GhostGame extends javax.swing.JFrame {
         FMJ1.setText(String.valueOf(contadormJ1));
         FBJ2.setText(String.valueOf(contadorbJ2));
         FMJ2.setText(String.valueOf(contadormJ2));
+        botons[0][0].jugador = menu.jugador2.getPlayersName();
+        botons[0][5].jugador = menu.jugador2.getPlayersName();
+        botons[5][0].jugador = menu.jugador1.getPlayersName();
+        botons[5][5].jugador = menu.jugador1.getPlayersName();
     }
 
     public void setJugador2() {
@@ -101,15 +106,34 @@ public class GhostGame extends javax.swing.JFrame {
         }
     }
 
-    private ImageIcon createImageIconFromURL(String imageUrl) {
-        try {
-            URL url = new URL(imageUrl);
-            Image image = javax.imageio.ImageIO.read(url);
-            return new ImageIcon(image);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+//    private ImageIcon createImageIconFromURL(String imageUrl) {
+//        try {
+//            URL url = new URL(imageUrl);
+//            Image image = javax.imageio.ImageIO.read(url);
+//            return new ImageIcon(image);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+    private void initFantasmas() {
+        gBuenosP1[0] = new Ghosts("BUENO", "/Images/GoodGhostP1.png");
+        gBuenosP1[1] = new Ghosts("BUENO", "/Images/GoodGhostP1.png");
+        gBuenosP1[2] = new Ghosts("BUENO", "/Images/GoodGhostP1.png");
+        gBuenosP1[3] = new Ghosts("BUENO", "/Images/GoodGhostP1.png");
+        gMalosP1[0] = new Ghosts("MALO", "/Images/GoodGhostP1.png");
+        gMalosP1[1] = new Ghosts("MALO", "/Images/GoodGhostP1.png");
+        gMalosP1[2] = new Ghosts("MALO", "/Images/GoodGhostP1.png");
+        gMalosP1[3] = new Ghosts("MALO", "/Images/GoodGhostP1.png");
+
+        gBuenosP2[0] = new Ghosts("BUENO", "/Images/GoodGhostP2.png");
+        gBuenosP2[1] = new Ghosts("BUENO", "/Images/GoodGhostP2.png");
+        gBuenosP2[2] = new Ghosts("BUENO", "/Images/GoodGhostP2.png");
+        gBuenosP2[3] = new Ghosts("BUENO", "/Images/GoodGhostP2.png");
+        gMalosP2[0] = new Ghosts("MALO", "/Images/GoodGhostP2.png");
+        gMalosP2[1] = new Ghosts("MALO", "/Images/GoodGhostP2.png");
+        gMalosP2[2] = new Ghosts("MALO", "/Images/GoodGhostP2.png");
+        gMalosP2[3] = new Ghosts("MALO", "/Images/GoodGhostP2.png");
     }
 
     public void initBotones() {
@@ -149,6 +173,7 @@ public class GhostGame extends javax.swing.JFrame {
         botons[5][5].setBackground(Color.DARK_GRAY);
         botons[5][5].fantasma.Tipo = "SALIDA";
         botons[5][5].setText(" SALIDA");
+
     }
 
     private void botonesMouseClicked(MouseEvent evt) {
@@ -159,19 +184,24 @@ public class GhostGame extends javax.swing.JFrame {
         boolean mover = false;
         String text = botonPresionado.getText();
         botonPresionado.setBorderPainted(true);
-        botons[0][0].jugador = menu.jugador2.getPlayersName();
-        botons[0][5].jugador = menu.jugador2.getPlayersName();
-        botons[5][0].jugador = menu.jugador1.getPlayersName();
-        botons[5][5].jugador = menu.jugador1.getPlayersName();
+
+        if (botonPresionado == null) {
+            JOptionPane.showMessageDialog(this, "Esta casilla está vacia por lo que no puedes moverla ni hacer nada con ella", "Casilla Vacía", JOptionPane.INFORMATION_MESSAGE);
+        }
         if (botonPresionado.habilitado == false) {
-            if (botonInicio == null && botonPresionado.fantasma.Tipo=="SALIDA" ) {
+            if (botonInicio == null && botonPresionado.fantasma.Tipo == "SALIDA") {
                 JOptionPane.showMessageDialog(this, "NO PUEDES MOVER ESTA CASILLA", "SALIDA", JOptionPane.INFORMATION_MESSAGE);
             }
             if (botonInicio == null) {
-                botonPresionado.setBorder(BorderFactory.createLineBorder(Color.RED, 5, true));
-                botonInicio = botonPresionado;
-                botonInicio.setText(botonPresionado.getText());
-                botonInicio.jugador = botonPresionado.jugador;
+                if (botonPresionado.jugador == turno) {
+                    botonPresionado.setBorder(BorderFactory.createLineBorder(Color.RED, 5, true));
+                    botonInicio = botonPresionado;
+                    botonInicio.setText(botonPresionado.getText());
+                    botonInicio.jugador = botonPresionado.jugador;
+                } else if (botonPresionado.jugador != turno && botonPresionado.jugador != "") {
+                    //VERIFICAR QUE SEA SU TURNO
+                    JOptionPane.showMessageDialog(this, "HEY NO ES TU TURNO!", "Intento de Trampa", JOptionPane.WARNING_MESSAGE);
+                }
             } else if (botonInicio == botonPresionado) {
                 botonInicio.setBorder(BorderFactory.createEmptyBorder());
                 botonPresionado.setBorder(BorderFactory.createEmptyBorder());
@@ -191,127 +221,152 @@ public class GhostGame extends javax.swing.JFrame {
 
                 } // cierre de verificacion si el movimiento es en misma fila y columna
             }
+        }
+        if (botonInicio != null && mover) {
             //VERIFICAR LA SALIDA CORRECTA DE CADA EQUIPO
-            if (botonPresionado.fantasma.Tipo=="SALIDA"  && botonInicio.jugador != botonPresionado.jugador && botonInicio != null) {
+            if (botonPresionado.fantasma.Tipo == "SALIDA" && botonInicio.jugador != botonPresionado.jugador && botonInicio != null) {
                 if (botonInicio.fantasma.Tipo == "BUENO") {
-                    JOptionPane.showMessageDialog(this, botonInicio.jugador + "ganó porque sacó del castillo un fantasma bueno!", "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
-                    menu.jugador1.addPoints();
+                    JOptionPane.showMessageDialog(this, botonInicio.jugador.toUpperCase() + "ganó porque sacó del castillo un fantasma bueno!", "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
+                    if (botonInicio.jugador == menu.jugador1.getPlayersName()) {
+                        menu.jugador1.addPoints();
+                    } else {
+                        menu.jugador2.addPoints();
+                    }
+                    menu.jugador2.gamesLogged.add(botonInicio.jugador.toUpperCase() + "ganó porque sacó del castillo un fantasma bueno!");
+                    menu.jugador1.gamesLogged.add(botonInicio.jugador.toUpperCase() + "ganó porque sacó del castillo un fantasma bueno!");
+                    menu.LogUsers.actualizarJugador(menu.jugador1);
+                    menu.LogUsers.actualizarJugador(menu.jugador2);
+                    botonInicio.setBorder(BorderFactory.createEmptyBorder());
                     this.setVisible(false);
                     menu2.setVisible(true);
                 } else if (botonInicio.fantasma.Tipo == "MALO") {
-                    JOptionPane.showMessageDialog(this, "Felicidades" + botonInicio.jugador + "!! Sacaste un fantasma malo del castillo", "un fantasma menos", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Felicidades " + botonInicio.jugador.toUpperCase() + "!! Sacaste un fantasma malo del castillo", "un fantasma menos", JOptionPane.INFORMATION_MESSAGE);
+                    botonPresionado.fantasma.Tipo = "SALIDA";
+                    botonInicio.setBorder(BorderFactory.createEmptyBorder());
+//                botonInicio.setText(null);
+                    botonInicio.fantasma = new Ghosts();
+                    botonInicio.setImage();
+                    botonInicio = null;
                     contadormJ1--;
                 }
-            } else if(botonInicio.jugador == botonPresionado.jugador && botonPresionado.getText() == "SALIDA" ) {
+                return;
+            } else if (botonInicio.jugador == botonPresionado.jugador && botonPresionado.getText() == "SALIDA" && botonInicio != null) {
                 JOptionPane.showMessageDialog(this, "NO PUEDES SACAR TU FANTASMA POR AQUI", "SALIDA INCORRECTA", JOptionPane.WARNING_MESSAGE);
             }
             //VERIFICACION DE MOVIMIENTOS
-            if (botonInicio.jugador == turno) {
-                if (botonPresionado.fantasma.Tipo == null && mover) { // EN CASO DE QUE LA SEGUNDA CASILLA NO TENGA NADA
-                    botonPresionado.setGhost(botonInicio.fantasma);// el boton presionado toma la informacion del personaje del primero boton seleccionado
-                    botonPresionado.setText(botonInicio.getText());// el boton presionado toma la informacion del primer boton seleccionado
-                    botonPresionado.setIcon(botonInicio.getIcon());
+            if (botonPresionado.fantasma.Tipo == null && mover) { // EN CASO DE QUE LA SEGUNDA CASILLA NO TENGA NADA
+                botonPresionado.setGhost(botonInicio.fantasma);// el boton presionado toma la informacion del personaje del primero boton seleccionado
+                botonPresionado.setText(botonInicio.getText());// el boton presionado toma la informacion del primer boton seleccionado
+                botonPresionado.setIcon(botonInicio.getIcon());
+                botonPresionado.jugador = botonInicio.jugador;
+                botonInicio.setBorder(BorderFactory.createEmptyBorder());
+//                botonInicio.setText(null);
+                botonInicio.fantasma = new Ghosts();
+                botonInicio.setImage();
+                botonInicio = null;
+                Turno();
+            } else if (botonInicio.fantasma.equals(botonPresionado.fantasma) && mover) {// EN CASO DE QUE SEAN DEL MISMO
+                botonInicio.setBorder(BorderFactory.createEmptyBorder());
+                botonPresionado.setBorder(BorderFactory.createLineBorder(Color.RED, 5, true));// se le pone el borde al boton para que se sepa que es lo que se esta seleccionando, el segundo boton se selecciona
+                botonInicio = botonPresionado;
+                botonInicio.setText(text);
+            } else if (botonPresionado.fantasma.Tipo != null && mover) {
+                botonInicio.setBorder(BorderFactory.createEmptyBorder());
+                if ((botonInicio.jugador != botonPresionado.jugador)) {
+                    JOptionPane.showMessageDialog(null, "Te comiste un " + botonPresionado.fantasma.Tipo + " de " + botonPresionado.jugador, "UN FANTASMA MENOS", JOptionPane.INFORMATION_MESSAGE);
+                    if (botonPresionado.fantasma.Tipo == "BUENO" && botonPresionado.jugador == menu.jugador1.getPlayersName()) {
+                        contadorbJ1--;
+                        FBJ1.setText(String.valueOf(contadorbJ1));
+                    } else if (botonPresionado.fantasma.Tipo == "MALO" && botonPresionado.jugador == menu.jugador1.getPlayersName()) {
+                        contadormJ1--;
+                        FMJ1.setText(String.valueOf(contadormJ1));
+                    } else if (botonPresionado.fantasma.Tipo == "BUENO" && botonPresionado.jugador == menu.jugador2.getPlayersName()) {
+                        contadorbJ2--;
+                        FBJ2.setText(String.valueOf(contadorbJ2));
+                    } else if (botonPresionado.fantasma.Tipo == "MALO" && botonPresionado.jugador == menu.jugador2.getPlayersName()) {
+                        contadormJ2--;
+                        FMJ2.setText(String.valueOf(contadormJ2));
+                    }
+                    if (contadormJ2 == 0) {
+                        perdiste = JOptionPane.showInputDialog(this, menu.jugador2.getPlayersName() + " ganó porque " + menu.jugador1.getPlayersName() + "comió todos sus fantasmas malos!", "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
+                        menu.jugador2.addPoints();
+                        menu.jugador2.gamesLogged.add(menu.jugador2.getPlayersName() + " ganó porque " + menu.jugador1.getPlayersName() + "comió todos sus fantasmas malos!");
+                        menu.jugador1.gamesLogged.add(menu.jugador2.getPlayersName() + " ganó porque " + menu.jugador1.getPlayersName() + "comió todos sus fantasmas malos!");
+                        menu.LogUsers.actualizarJugador(menu.jugador1);
+                        menu.LogUsers.actualizarJugador(menu.jugador2);
+                        this.setVisible(false);
+                        menu2.setVisible(true);
+                    } else if (contadorbJ2 == 0) {
+                        perdiste = JOptionPane.showInputDialog(this, menu.jugador1.getPlayersName() + " ganó porque capturo todos los fantasmas buenos de " + menu.jugador2.getPlayersName(), "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
+                        menu.jugador1.addPoints();
+                        menu.jugador2.gamesLogged.add(menu.jugador1.getPlayersName() + " ganó porque capturo todos los fantasmas buenos de " + menu.jugador2.getPlayersName());
+                        menu.jugador1.gamesLogged.add(menu.jugador1.getPlayersName() + " ganó porque capturo todos los fantasmas buenos de " + menu.jugador2.getPlayersName());
+                        menu.LogUsers.actualizarJugador(menu.jugador1);
+                        menu.LogUsers.actualizarJugador(menu.jugador2);
+                        this.setVisible(false);
+                        menu2.setVisible(true);
+                    } else if (contadormJ1 == 0) {
+                        perdiste = JOptionPane.showInputDialog(this, menu.jugador1.getPlayersName() + " ganó porque " + menu.jugador2.getPlayersName() + "comió todos sus fantasmas malos!", "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
+                        menu.jugador1.addPoints();
+                        menu.jugador1.gamesLogged.add(menu.jugador1.getPlayersName() + " ganó porque " + menu.jugador2.getPlayersName() + "comió todos sus fantasmas malos!");
+                        menu.jugador2.gamesLogged.add(menu.jugador1.getPlayersName() + " ganó porque " + menu.jugador2.getPlayersName() + "comió todos sus fantasmas malos!");
+                        menu.LogUsers.actualizarJugador(menu.jugador1);
+                        menu.LogUsers.actualizarJugador(menu.jugador2);
+                        this.setVisible(false);
+                        menu2.setVisible(true);
+                    } else if (contadorbJ1 == 0) {
+                        perdiste = JOptionPane.showInputDialog(this, menu.jugador2.getPlayersName() + " ganó porque capturó todos los fantasmas buenos de" + menu.jugador1.getPlayersName(), "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
+                        menu.jugador2.addPoints();
+                        menu.jugador1.gamesLogged.add(menu.jugador2.getPlayersName() + " ganó porque capturó todos los fantasmas buenos de" + menu.jugador1.getPlayersName());
+                        menu.jugador2.gamesLogged.add(menu.jugador2.getPlayersName() + " ganó porque capturó todos los fantasmas buenos de" + menu.jugador1.getPlayersName());
+                        menu.LogUsers.actualizarJugador(menu.jugador1);
+                        menu.LogUsers.actualizarJugador(menu.jugador2);
+                        this.setVisible(false);
+                        menu2.setVisible(true);
+                    }
+                    botonPresionado.fantasma = botonInicio.fantasma;
                     botonPresionado.jugador = botonInicio.jugador;
-                    botonInicio.setBorder(BorderFactory.createEmptyBorder());
-                    botonInicio.setText(null);
+                    botonPresionado.setText(botonInicio.getText());
+                    botonPresionado.setIcon(botonInicio.getIcon());
+//                    botonInicio.setText(null);
                     botonInicio.fantasma = new Ghosts();
+                    botonInicio.setImage();
                     botonInicio = null;
                     Turno();
-                } else if (botonInicio.fantasma.equals(botonPresionado.fantasma) && mover) {// EN CASO DE QUE SEAN DEL MISMO
-                    botonInicio.setBorder(BorderFactory.createEmptyBorder());
-                    botonPresionado.setBorder(BorderFactory.createLineBorder(Color.RED, 5, true));// se le pone el borde al boton para que se sepa que es lo que se esta seleccionando, el segundo boton se selecciona
-                    botonInicio = botonPresionado;
-                    botonInicio.setText(text);
-                } else if (botonPresionado.fantasma.Tipo != null && mover) {
-                    botonInicio.setBorder(BorderFactory.createEmptyBorder());
-                    if ((botonInicio.jugador != botonPresionado.jugador)) {
-                        JOptionPane.showMessageDialog(null, "Te comiste un " + botonPresionado.fantasma.Tipo + " de " + botonPresionado.jugador, "UN FANTASMA MENOS", JOptionPane.INFORMATION_MESSAGE);
-                        if (botonPresionado.fantasma.Tipo == "BUENO" && botonPresionado.jugador == menu.jugador1.getPlayersName()) {
-                            contadorbJ1--;
-                            FBJ1.setText(String.valueOf(contadorbJ1));
-                        } else if (botonPresionado.fantasma.Tipo == "MALO" && botonPresionado.jugador == menu.jugador1.getPlayersName()) {
-                            contadormJ1--;
-                            FMJ1.setText(String.valueOf(contadormJ1));
-                        } else if (botonPresionado.fantasma.Tipo == "BUENO" && botonPresionado.jugador == menu.jugador2.getPlayersName()) {
-                            contadorbJ2--;
-                            FBJ2.setText(String.valueOf(contadorbJ2));
-                        } else if (botonPresionado.fantasma.Tipo == "MALO" && botonPresionado.jugador == menu.jugador2.getPlayersName()) {
-                            contadormJ2--;
-                            FMJ2.setText(String.valueOf(contadormJ2));
-                        }
-                        if (contadormJ2 == 0) {
-                            perdiste = JOptionPane.showInputDialog(this, menu.jugador2.getPlayersName() + " ganó porque " + menu.jugador1.getPlayersName() + "comió todos sus fantasmas malos!", "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
-                            menu.jugador2.addPoints();
-                        } else if (contadorbJ2 == 0) {
-                            perdiste = JOptionPane.showInputDialog(this, menu.jugador1.getPlayersName() + " ganó porque capturo todos los fantasmas buenos de " + menu.jugador2.getPlayersName(), "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
-                            menu.jugador1.addPoints();
-                        } else if (contadormJ1 == 0) {
-                            perdiste = JOptionPane.showInputDialog(this, menu.jugador1.getPlayersName() + " ganó porque " + menu.jugador2.getPlayersName() + "comió todos sus fantasmas malos!", "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
-                            menu.jugador1.addPoints();
-                        } else if (contadorbJ1 == 0) {
-                            perdiste = JOptionPane.showInputDialog(this, menu.jugador2.getPlayersName() + " ganó porque capturó todos los fantasmas buenos de" + menu.jugador1.getPlayersName(), "GANASTE!", JOptionPane.INFORMATION_MESSAGE);
-                            menu.jugador2.addPoints();
-                        }
-                        botonPresionado.fantasma = botonInicio.fantasma;
-                        botonPresionado.jugador = botonInicio.jugador;
-                        botonPresionado.setText(botonInicio.getText());
-                        botonPresionado.setIcon(botonInicio.getIcon());
-                        botonInicio.setText(null);
-                        botonInicio.fantasma = new Ghosts();
-                        Turno();
-                    }
-                    botonInicio = null;
                 }
-            } else {
-                //VERIFICAR QUE SEA SU TURNO
-                JOptionPane.showMessageDialog(this, "HEY NO ES TU TURNO!", "Intento de Trampa", JOptionPane.WARNING_MESSAGE);
+
+                botonInicio = null;
             }
         }
     }
 
     //CAMBIAR DE TURNOS
     public void Turno() {
-        if (botonFinal.jugador == menu.jugador1.getPlayersName()) {
-            turno = menu.jugador2.getPlayersName();
-        } else if (botonFinal.jugador == menu.jugador2.getPlayersName()) {
-            turno = menu.jugador1.getPlayersName();
+        if (botonFinal != null) {
+            if (botonFinal.jugador == menu.jugador1.getPlayersName()) {
+                turno = menu.jugador2.getPlayersName();
+            } else if (botonFinal.jugador == menu.jugador2.getPlayersName()) {
+                turno = menu.jugador1.getPlayersName();
+            }
+            JOptionPane.showMessageDialog(this, "Es turno de " + turno, "TURNO", JOptionPane.INFORMATION_MESSAGE);
+            NOMBRE.setText(turno);
         }
-        JOptionPane.showMessageDialog(this, "Es turno de " + turno, "TURNO", JOptionPane.INFORMATION_MESSAGE);
-        NOMBRE.setText(turno);
-    }
-
-    private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
-        Image img = icon.getImage();
-        Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight, java.awt.Image.SCALE_SMOOTH);
-        return new ImageIcon(resizedImage);
-    }
-
-    private void initFantasmas() {
-        gBuenos[0] = new Ghosts("BUENO", "/Images/goodGhost.png");
-        gBuenos[1] = new Ghosts("BUENO", "/Images/goodGhost.png");
-        gBuenos[2] = new Ghosts("BUENO", "/Images/goodGhost.png");
-        gBuenos[3] = new Ghosts("BUENO", "/Images/goodGhost.png");
-        gMalos[0] = new Ghosts("MALO", "/Images/badGhost.png");
-        gMalos[1] = new Ghosts("MALO", "/Images/badGhost.png");
-        gMalos[2] = new Ghosts("MALO", "/Images/badGhost.png");
-        gMalos[3] = new Ghosts("MALO", "/Images/badGhost.png");
     }
 
     private void setFantasmasRandom() {
 
-        ImageIcon image = new ImageIcon("NetBeansProjects/Ghosts/src/Images/Images/goodG.png");
         //UBICAR DE MANER RANDOM LOS FANTASMAS BUENOS DEL JUGADOR 1
         for (int pos_fanJB1 = cantBuenos - 1; pos_fanJB1 >= 0; pos_fanJB1--) {
             int fantasmaActual = pos_fanJB1;
             while (pos_fanJB1 == fantasmaActual) {
                 int f, c;
-                if (gBuenos[pos_fanJB1].Tipo == "BUENO") {
+                if (gBuenosP1[pos_fanJB1].Tipo == "BUENO") {
                     f = getRandom(4, 5);
                     c = getRandom(1, 4);
                     if (botons[f][c].fantasma.Tipo == null) {
-                        botons[f][c].setText("___");
-                        botons[f][c].setIcon(image);
-                        botons[f][c].setGhost(gBuenos[pos_fanJB1]);
+//                        botons[f][c].setText("___");
+                        botons[f][c].setGhost(gBuenosP1[pos_fanJB1]);
+                        botons[f][c].setImage();
                         botons[f][c].jugador = menu.jugador1.getPlayersName();
                         fantasmaActual--;
                     }
@@ -323,12 +378,13 @@ public class GhostGame extends javax.swing.JFrame {
             int fanActual = pos_fanJM1;
             while (pos_fanJM1 == fanActual) {
                 int fil, col;
-                if (gBuenos[pos_fanJM1].Tipo == "BUENO") {
+                if (gMalosP1[pos_fanJM1].Tipo == "MALO") {
                     fil = getRandom(4, 5);
                     col = getRandom(1, 4);
                     if (botons[fil][col].fantasma.Tipo == null) {
-                        botons[fil][col].setText("___");
-                        botons[fil][col].setGhost(gMalos[pos_fanJM1]);
+//                        botons[fil][col].setText("___");
+                        botons[fil][col].setGhost(gMalosP1[pos_fanJM1]);
+                        botons[fil][col].setImage();
                         botons[fil][col].jugador = menu.jugador1.getPlayersName();
                         fanActual--;
                     }
@@ -337,16 +393,17 @@ public class GhostGame extends javax.swing.JFrame {
         }
 
         //UBICAR DE MANER RANDOM LOS FANTASMAS BUENOS DEL JUGADOR 2
-        for (int pos_fanJB2 = cantBuenos-1; pos_fanJB2 >= 0; pos_fanJB2--) {
+        for (int pos_fanJB2 = cantBuenos - 1; pos_fanJB2 >= 0; pos_fanJB2--) {
             int fantasmaActual2 = pos_fanJB2;
             while (pos_fanJB2 == fantasmaActual2) {
                 int f, c;
-                if (gBuenos[pos_fanJB2].Tipo == "BUENO") {
+                if (gBuenosP2[pos_fanJB2].Tipo == "BUENO") {
                     f = getRandom(0, 1);
                     c = getRandom(1, 4);
                     if (botons[f][c].fantasma.Tipo == null) {
-                        botons[f][c].setText("___");
-                        botons[f][c].setGhost(gBuenos[pos_fanJB2]);
+//                        botons[f][c].setText("___");
+                        botons[f][c].setGhost(gBuenosP2[pos_fanJB2]);
+                        botons[f][c].setImage();
                         botons[f][c].jugador = menu.jugador2.getPlayersName();
                         fantasmaActual2--;
                     }
@@ -358,12 +415,13 @@ public class GhostGame extends javax.swing.JFrame {
             int fanActualJ2 = pos_fanJM2;
             while (pos_fanJM2 == fanActualJ2) {
                 int fil, col;
-                if (gBuenos[pos_fanJM2].Tipo == "BUENO") {
+                if (gMalosP2[pos_fanJM2].Tipo == "MALO") {
                     fil = getRandom(0, 1);
                     col = getRandom(1, 4);
                     if (botons[fil][col].fantasma.Tipo == null) {
-                        botons[fil][col].setText("___");
-                        botons[fil][col].setGhost(gMalos[pos_fanJM2]);
+//                        botons[fil][col].setText("___");
+                        botons[fil][col].setGhost(gMalosP2[pos_fanJM2]);
+                        botons[fil][col].setImage();
                         botons[fil][col].jugador = menu.jugador2.getPlayersName();
                         fanActualJ2--;
                     }
@@ -409,55 +467,55 @@ public class GhostGame extends javax.swing.JFrame {
         TABLERO.setLayout(TABLEROLayout);
         TABLEROLayout.setHorizontalGroup(
             TABLEROLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGap(0, 1040, Short.MAX_VALUE)
         );
         TABLEROLayout.setVerticalGroup(
             TABLEROLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 690, Short.MAX_VALUE)
         );
 
-        fondo.add(TABLERO, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 1090, 690));
+        fondo.add(TABLERO, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 1040, 690));
 
         NOMBRE.setFont(new java.awt.Font("Viner Hand ITC", 1, 36)); // NOI18N
         NOMBRE.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(NOMBRE, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 80, 130, 40));
+        fondo.add(NOMBRE, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 140, 180, 40));
 
         jLabel8.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TURNO DE");
-        fondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 80, 150, -1));
+        fondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 140, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("FANTASMAS JUGADOR 1");
-        fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 180, 314, 36));
+        fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 230, 314, 36));
 
         jLabel3.setBackground(new java.awt.Color(102, 0, 0));
         jLabel3.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("FANTASMAS BUENOS");
-        fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 220, 270, 36));
+        fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 270, 270, 36));
 
         jLabel4.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("FANTASMAS MALOS");
-        fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 270, 260, 36));
+        fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 320, 260, 36));
 
         jLabel5.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("FANTASMAS JUGADOR 2");
-        fondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 360, 314, 36));
+        fondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 390, 314, 36));
 
         jLabel6.setBackground(new java.awt.Color(102, 0, 0));
         jLabel6.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("FANTASMAS BUENOS");
-        fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 400, 270, 36));
+        fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 430, 270, 36));
 
         jLabel7.setFont(new java.awt.Font("Chiller", 1, 36)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("FANTASMAS MALOS");
-        fondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 450, 260, 36));
+        fondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 480, 260, 36));
 
         jButton1.setBackground(new java.awt.Color(102, 0, 0));
         jButton1.setFont(new java.awt.Font("Chiller", 0, 36)); // NOI18N
@@ -469,7 +527,7 @@ public class GhostGame extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 590, 229, -1));
+        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 660, 229, -1));
         fondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 220, -1, 40));
 
         jLabel9.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
@@ -483,7 +541,7 @@ public class GhostGame extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        fondo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 20, 190, 40));
+        fondo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 190, 40));
 
         jLabel10.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -496,33 +554,33 @@ public class GhostGame extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        fondo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 700, 190, 40));
+        fondo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 750, 190, 40));
 
         FMJ2.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FMJ2.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(FMJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 440, 40, 40));
+        fondo.add(FMJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1430, 480, 40, 40));
 
         FBJ1.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FBJ1.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(FBJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 210, 40, 40));
+        fondo.add(FBJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 270, 40, 40));
 
         FMJ1.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FMJ1.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(FMJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 260, 40, 40));
+        fondo.add(FMJ1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 320, 40, 40));
 
         FBJ2.setFont(new java.awt.Font("Chiller", 1, 24)); // NOI18N
         FBJ2.setForeground(new java.awt.Color(255, 255, 255));
-        fondo.add(FBJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 400, 40, 40));
+        fondo.add(FBJ2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 420, 40, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 1487, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
         );
 
         pack();

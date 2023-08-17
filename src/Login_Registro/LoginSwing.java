@@ -15,6 +15,7 @@ public class LoginSwing extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.menu = menu;
+
     }
 
     @SuppressWarnings("unchecked")

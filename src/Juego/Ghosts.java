@@ -1,6 +1,7 @@
 package Juego;
 
 public class Ghosts {
+
     String Tipo;
     String ImagePath;
 
@@ -8,8 +9,9 @@ public class Ghosts {
         this.Tipo = Tipo;
         this.ImagePath = ImagePath;
     }
-    public Ghosts(){
-        
+
+    public Ghosts() {
+
     }
-    
+
 }

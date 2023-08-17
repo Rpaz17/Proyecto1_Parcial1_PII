@@ -1,6 +1,9 @@
 package Login_Registro;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Login {
 
@@ -8,7 +11,12 @@ public class Login {
     Jugador jugador;
 
     public Login() {
-        jugadorArreglo = new ArrayList<Jugador>();
+        jugadorArreglo = new ArrayList<>();
+
+    }
+
+    public ArrayList<Jugador> getJugadorArreglo() {
+        return jugadorArreglo;
     }
 
     /*
@@ -56,10 +64,18 @@ public class Login {
     public boolean eliminarCuenta(String jugador) {
         Jugador eliminar = buscarJugador(jugador);
         if (eliminar != null) {
-            jugadorArreglo.remove( buscarJugador(jugador));
+            jugadorArreglo.remove(buscarJugador(jugador));
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void actualizarJugador(Jugador player) {
+        for (int i=0; i<jugadorArreglo.size(); i++) {
+            if (jugadorArreglo.get(i).playersName.equals(player.playersName)) {
+                jugadorArreglo.set(i, player);
+            }
         }
     }
 }
